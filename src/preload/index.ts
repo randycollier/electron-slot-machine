@@ -2,7 +2,7 @@ import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 
 const api = {
-  getOrCreatePlayer: (playerName: string) => ipcRenderer.invoke('get-or-create-player', playerName),
+  getOrCreatePlayer: (playerName: string): Promise<Player> => ipcRenderer.invoke('get-or-create-player', playerName),
   startGame: (playerId: number, startingBalance: number) =>
     ipcRenderer.invoke('start-game', playerId, startingBalance),
   endGame: (gameId: number, endingBalance: number) =>
