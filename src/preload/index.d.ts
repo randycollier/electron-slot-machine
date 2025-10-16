@@ -35,6 +35,7 @@ interface LeaderboardEntry {
 interface Window {
   api: {
     getOrCreatePlayer: (playerName: string) => Promise<Player>
+    getNumberOfGamesPlayed: (playerId: number) => Promise<{ count: number }>
     startGame: (playerId: number, startingBalance: number) => Promise<{ gameId: number }>
     endGame: (gameId: number, endingBalance: number) => Promise<void>
     recordSpin: (

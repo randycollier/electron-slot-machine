@@ -1,13 +1,16 @@
-import { useState, useEffect} from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { usePlayers } from '../hooks/index'
-import { LeaderboardEntry } from '@preload'
-type LandingProps = {
-  startGame: (playerName: string) => void
-}
-const Landing = ({ startGame }: LandingProps): JSX.Element => {
-  const [playerName, setPlayerName] = useState<string>('');
-  const { getLeaderboard } = usePlayers();
+import LeaderBoard from '@components/slotMachine/landing/leaderBoard'
+import type { LeaderboardEntry, Player } from '@preload'
+import PlayerLogin from '../landing/playerLogin'
+const Landing = ({
+  onPlayerSelected
+}: {
+  onPlayerSelected: (player: Player) => void
+}): JSX.Element => {
+  const { getLeaderboard, player, getOrCreatePlayer } = usePlayers()
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([])
+  const [playerName, setPlayerName] = useState<string>('')
 
   useEffect(() => {
     const fetchLeaderboard = async (): Promise<void> => {
@@ -15,33 +18,28 @@ const Landing = ({ startGame }: LandingProps): JSX.Element => {
       setLeaderboard(leaderboard)
     }
     fetchLeaderboard()
-  }, [getLeaderboard]);
+  }, [getLeaderboard])
 
-  
-  const handleNameChange = (evt: React.ChangeEvent<HTMLInputElement>): void => {
-    setPlayerName(evt.target.value);
-  }
-  const handleStart = (): void => {
-    startGame(playerName)
-  }
+  const handleNameChange = useCallback((evt: React.ChangeEvent<HTMLInputElement>): void => {
+    const value = evt.target.value.trim()
+    setPlayerName(value)
+  }, [])
+
+  const submitPlayerName = useCallback(async (): Promise<void> => {
+    const currentPlayer = await getOrCreatePlayer(playerName)
+    onPlayerSelected(currentPlayer)
+  }, [getOrCreatePlayer, onPlayerSelected, playerName])
 
   return (
     <div>
       <h1>Slot Machine</h1>
-      <h2>Enter your name</h2>
-      <input type="text" value={playerName} onChange={handleNameChange} />
-      <button onClick={handleStart}>Start</button>
-      {leaderboard.length > 0 && (
-        <section>
-          <h2>Leaderboard</h2>
-          <ul>
-            {leaderboard?.length > 0 && leaderboard?.map((player) => (
-              <li key={player.player_id}>{player.name} {player.highest_balance} {player.total_spins}</li>
-            ))}
-          </ul>
-        </section>
-      )}
-     
+      <PlayerLogin
+        player={player}
+        playerName={playerName}
+        handleNameChange={handleNameChange}
+        submitPlayerName={submitPlayerName}
+      />
+      <LeaderBoard leaderboard={leaderboard} />
     </div>
   )
 }

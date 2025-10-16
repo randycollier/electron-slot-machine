@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
 const useSlotMachine = (): { slots: string[] } => {
-  const [slots] = useState<string[]>([]);
+  const [slots] = useState<string[]>([])
   return {
-    slots,
-  };
+    slots
+  }
 }
 
 export default useSlotMachine

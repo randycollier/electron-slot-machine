@@ -1,6 +1,7 @@
 import Reels from './reels/Reels'
 import Landing from './landing'
 import { useState } from 'react'
+import type { Player } from '@preload'
 const SlotMachineContent = ({ playerName }: { playerName: string }): JSX.Element => {
   return (
     <div>
@@ -11,13 +12,13 @@ const SlotMachineContent = ({ playerName }: { playerName: string }): JSX.Element
   )
 }
 const SlotMachine = (): JSX.Element => {
-  const [playerName, setPlayerName] = useState<string>('')
+  const [player, setPlayer] = useState<Player | null>(null)
   return (
     <div>
-      {playerName ? (
-        <SlotMachineContent playerName={playerName} />
+      {player ? (
+        <SlotMachineContent playerName={player.name} />
       ) : (
-        <Landing startGame={setPlayerName} />
+        <Landing onPlayerSelected={setPlayer} />
       )}
     </div>
   )

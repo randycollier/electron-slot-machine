@@ -2,12 +2,26 @@ import { useCallback, useState } from 'react'
 import type { Player, LeaderboardEntry } from '@preload'
 
 type UsePlayersReturn = {
-  players: Player[]
+  player: Player | null
+  getOrCreatePlayer: (playerName: string) => Promise<Player | null>
   getLeaderboard: () => Promise<LeaderboardEntry[]>
 }
 
 const usePlayers = (): UsePlayersReturn => {
-  const [players] = useState<Player[]>([])
+  const [player, setPlayer] = useState<Player | null>(null)
+
+  const getOrCreatePlayer = useCallback(async (playerName: string): Promise<Player | null> => {
+    try {
+
+      const player = await window.api.getOrCreatePlayer(playerName)
+      console.log(playerName,'>>>player from usePlayers', player)
+      setPlayer(player)
+      return player
+    } catch (error) {
+      console.error('Error getting or creating player:', error)
+      return null
+    }
+  }, [])
 
   const getLeaderboard = useCallback(async (): Promise<LeaderboardEntry[]> => {
     try {
@@ -20,8 +34,9 @@ const usePlayers = (): UsePlayersReturn => {
   }, [])
 
   return {
-    players,
-    getLeaderboard
+    player,
+    getLeaderboard,
+    getOrCreatePlayer
   } as const
 }
 
