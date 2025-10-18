@@ -1,0 +1,34 @@
+{
+  "landing": {
+    "title": "Slot Machine"
+  },
+  "introduction": {
+    "title": "Welcome, {name}!",
+    "balance": "Good luck spinning the reels!",
+    "startGameButton": "Start Playing"
+  },
+  "playerLogin": {
+    "placeholder": "Enter your name",
+    "submit": "Start Playing",
+    "playerNameLabel": "Player Name"
+  },
+  "leaderboard": {
+    "title": "Leaderboard",
+    "highestBalance": "Highest Balance",
+    "spins": "Spins"
+  },
+  "playerInfo": {
+    "player": "Player: {name}",
+    "balance": "Balance: {balance} Credits"
+  },
+  "gameScreen": {
+    "title": "Slot Machine",
+    "insufficientFunds": "Insufficient balance - Game Over!",
+    "endGameButton": "End Game"
+  },
+  "spinButton": {
+    "spinning": "Spinning...",
+    "spin": "Spin ({costPerSpin} Credits)"
+  }
+}
+
