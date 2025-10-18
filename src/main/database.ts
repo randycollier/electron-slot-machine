@@ -1,6 +1,7 @@
 import { app, ipcMain } from 'electron'
 import Database from 'better-sqlite3'
 import { join } from 'path'
+import type { Player } from '@preload'
 
 // Database instance
 let db: Database.Database | null = null
@@ -97,8 +98,7 @@ export function setupIpcHandlers(): void {
     // TODO: Only select name from players table
     let player = getDatabase()
       .prepare('SELECT * FROM players WHERE name = ?')
-      .get(playerName) as any
-
+      .get(playerName) as Player
     // If player doesn't exist, create a new one
     if (!player) {
       const result = getDatabase().prepare('INSERT INTO players (name) VALUES (?)').run(playerName)
@@ -123,6 +123,7 @@ export function setupIpcHandlers(): void {
   ipcMain.handle(
     'record-spin',
     (_, gameId: number, symbols: string, betAmount: number, winAmount: number) => {
+      console.log('DB >>>>>>Recording spin:', { gameId, symbols, betAmount, winAmount })
       const result = getDatabase()
         .prepare(
           `

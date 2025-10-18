@@ -10,9 +10,17 @@
     "composite": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "paths": {
+      "@/*": [
+        "src/renderer/src/*"
+      ],
       "@renderer/*": [
         "src/renderer/src/*"
+      ],
+      "@preload": [
+        "src/preload/index.d.ts"
       ]
     }
   }
