@@ -16,6 +16,7 @@ interface UseSlotMachineGameReturn {
   handleSpinStart: () => void
   handleGameRoundComplete: (result: { symbols: string[] }) => Promise<void>
   handleEndGame: () => Promise<void>
+  handleResetGame: () => Promise<void>
 }
 
 export const useSlotMachineGame = (): UseSlotMachineGameReturn => {
@@ -103,6 +104,33 @@ export const useSlotMachineGame = (): UseSlotMachineGameReturn => {
     }
   }, [player, endGame, balance, getOrCreatePlayer])
 
+  const handleResetGame = useCallback(async (): Promise<void> => {
+    if (!player) return
+
+    try {
+      // End the current game with 0 balance
+      await endGame({ endingBalance: 0 })
+
+      // Reset to default starting balance
+      setBalance(DEFAULT_STARTING_BALANCE)
+
+      // Update player state
+      setPlayer((prev) => {
+        if (!prev) return null
+        return { ...prev, highest_balance: DEFAULT_STARTING_BALANCE }
+      })
+
+      // Start a new game
+      if (player.player_id) {
+        await startGame({ playerId: player.player_id, startingBalance: DEFAULT_STARTING_BALANCE })
+      }
+
+      console.log('Game reset with new starting balance')
+    } catch (error) {
+      console.error('Error resetting game:', error)
+    }
+  }, [player, endGame, startGame])
+
   // ============================================================================
   // Cleanup Logic - Auto-save on app close
   // ============================================================================
@@ -160,6 +188,7 @@ export const useSlotMachineGame = (): UseSlotMachineGameReturn => {
     handleStartGame,
     handleSpinStart,
     handleGameRoundComplete,
-    handleEndGame
+    handleEndGame,
+    handleResetGame
   }
 }

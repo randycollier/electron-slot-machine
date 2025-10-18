@@ -12,8 +12,16 @@
     "submit": "Start Playing",
     "playerNameLabel": "Player Name"
   },
+  "resetButton": {
+    "resetGameButtonText": "Reset Game"
+  },
   "leaderboard": {
+    "topPlayers": "{count} Top Players",
+    "noPlayers": "No players yet. Be the first!",
+    "rank": "Rank",
+    "player": "Player",
     "title": "Leaderboard",
+    "totalSpins": "Total Spins",
     "highestBalance": "Highest Balance",
     "spins": "Spins"
   },
@@ -29,6 +37,16 @@
   "spinButton": {
     "spinning": "Spinning...",
     "spin": "Spin ({costPerSpin} Credits)"
+  },
+  "howToPlay": {
+    "title": "How to Play",
+    "rulesTitle": "Game Rules:",
+    "rule1": "Each spin costs {cost} Credits",
+    "rule2": "Match symbols to win prizes",
+    "rule3": "The more valuable the match, the bigger the payout!",
+    "rule4": "Try to achieve the highest balance possible",
+    "winningsTitle": "🏆 Winning Combinations:",
+    "creditsLabel": "{amount} Credits"
   }
 }
 

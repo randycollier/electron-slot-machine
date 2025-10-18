@@ -183,7 +183,7 @@
     }
   }
   
-  .feedback-message.win {
+  .feedback-=8754210.win {
     background: linear-gradient(145deg, #4caf50, #66bb6a);
     box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
   }
@@ -246,42 +246,102 @@
     margin: 20px 0;
   }
   
-  /* Spin Button */
-  .spin-button {
-    background: linear-gradient(145deg, #ff6b6b, #ee5a6f);
-    color: white;
+  .end-game-button {
+    width: 100%;
+    background: var(--gradient-alert-button);
+    color: var(--color-text);
     border: none;
-    padding: 20px 50px;
-    font-size: 1.3rem;
+    padding: var(--spacing-small);
+    font-size: 1.2rem;
     font-weight: bold;
-    border-radius: 50px;
+    border-radius: var(--radius-medium);
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
     transition: all 0.3s ease;
-    text-transform: uppercase;
   }
-  
-  .spin-button:hover:not(.disabled) {
+
+  .end-game-button:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 107, 107, 0.6);
+    background: linear-gradient(145deg, #ff5252, #ff1744);
+  }
+
+  .end-game-button:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 3px 10px rgba(255, 107, 107, 0.4);
+  }
+
+  .end-game-button:disabled {
+    background: linear-gradient(145deg, #757575, #616161);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .reset-button {
+    width: 100%;
+    background: var(--gradient-reset-button);
+    color: var(--color-text);
+    border: none;
+    padding: var(--spacing-small);
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: var(--radius-medium);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .reset-button:hover:not(:disabled) {
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(255, 107, 107, 0.6);
     background: linear-gradient(145deg, #ff5252, #ff1744);
   }
   
-  .spin-button:active:not(.disabled) {
+  .reset-button:active:not(:disabled) {
     transform: translateY(0);
     box-shadow: 0 3px 10px rgba(255, 107, 107, 0.4);
   }
   
-  .spin-button.disabled {
+  .reset-button:disabled {
     background: linear-gradient(145deg, #757575, #616161);
     cursor: not-allowed;
     opacity: 0.6;
   }
   
+  /* Spin Button */
+  .spin-button {
+    width: 100%;
+    background: var(--gradient-button);
+    color: var(--color-text);
+    border: none;
+    padding: var(--spacing-small);
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: var(--radius-medium);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .spin-button:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
+  }
+  
+  .spin-button:disabled {
+    background: var(--gradient-disabled);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+
   .spin-button.spinning {
     animation: buttonPulse 0.5s ease-in-out infinite;
   }
   
+  .reset-button:disabled {
+    background: linear-gradient(145deg, #757575, #616161);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
   @keyframes buttonPulse {
     0%,
     100% {

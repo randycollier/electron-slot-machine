@@ -1,0 +1,100 @@
+.how-to-play {
+  padding: 20px;
+  max-width: 500px;
+  max-height: 500px;
+  margin: 0 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar styling */
+.how-to-play::-webkit-scrollbar {
+  width: 8px;
+}
+
+.how-to-play::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.how-to-play::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 4px;
+}
+
+.how-to-play::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+  .how-to-play h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: var(--color-accent);
+  }
+
+  .rules {
+    margin-bottom: 30px;
+  }
+
+  .rules h3 {
+    margin-bottom: 15px;
+    color: var(--color-text);
+  }
+
+  .rules ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .rules li {
+    padding: 8px 0;
+    color: var(--color-text-muted);
+  }
+
+  .rules li strong {
+    color: var(--color-accent);
+  }
+
+  .winning-combinations h3 {
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  .win-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .win-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-medium);
+    transition: all 0.2s;
+  }
+
+  .win-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+  }
+
+  .win-item .symbols {
+    font-size: 1.5rem;
+    letter-spacing: 4px;
+  }
+
+  .win-item .arrow {
+    color: var(--color-text-muted);
+    margin: 0 10px;
+  }
+
+  .win-item .payout {
+    font-weight: bold;
+    color: var(--color-accent);
+    min-width: 100px;
+    text-align: right;
+  }

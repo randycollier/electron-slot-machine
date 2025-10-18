@@ -41,8 +41,11 @@ const Landing = ({ onPlayerSelected }: LandingProps): JSX.Element => {
   }, [getOrCreatePlayer, onPlayerSelected, playerName])
 
   return (
-    <div>
-      <h1>{title}</h1>
+    <div className="game-screen">
+      <header>
+        <h1>🎰 {title} 🎰</h1>
+      </header>
+
       <PlayerLogin
         player={player}
         playerName={playerName}
