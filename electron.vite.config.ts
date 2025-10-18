@@ -17,6 +17,19 @@ export default defineConfig({
         '@preload': resolve('src/preload/index.d.ts')
       }
     },
-    plugins: [react()]
+    plugins: [react()],
+    server: {
+      watch: {
+        usePolling: false,
+        interval: 100
+      }
+    },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: undefined
+        }
+      }
+    }
   }
 })

@@ -1,6 +1,7 @@
 import { memo } from 'react'
 import type { Player } from '@/types'
 import { useIntl } from 'react-intl'
+import '@/assets/slot-machine.css'
 interface PlayerLoginProps {
   playerName: string
   player: Player | null
@@ -28,18 +29,18 @@ const PlayerLogin = ({
     submitPlayerName()
   }
   return (
-    <section>
-      <h2>Enter your name</h2>
+    <section className="login-screen">
       <form onSubmit={handleSubmit}>
         <label htmlFor="playerName">{playerNameLabel}</label>
         <input
+          className="name-input"
           placeholder={placeholder}
           id="playerName"
           type="text"
           value={playerName}
           onChange={handleNameChange}
         />
-        <button disabled={!playerName} type="submit">
+        <button className="start-button" disabled={!playerName} type="submit">
           {submit}
         </button>
       </form>

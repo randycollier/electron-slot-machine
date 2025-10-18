@@ -31,10 +31,12 @@ const SpinButton = ({
   }
   const buttonText = getSpinButtonText()
 
+  const isDisabled = !canSpin || isSpinning
+
   return (
     <button
       onClick={handleSpin}
-      disabled={!canSpin}
+      disabled={isDisabled}
       className="spin-button"
       aria-label={buttonText}
     >
