@@ -31,12 +31,6 @@ const useGame = (): UseGameReturn => {
   const startGame = useCallback(
     async ({ playerId, startingBalance }: { playerId: number; startingBalance: number }) => {
       try {
-        console.log(
-          'Starting game for player:',
-          playerId,
-          'with starting balance:',
-          startingBalance
-        )
         const result = await window.api.startGame(playerId, startingBalance)
         setGameId(result.gameId)
         setBalance(startingBalance)
@@ -79,6 +73,8 @@ const useGame = (): UseGameReturn => {
         } catch (error) {
           console.error('Error recording spin:', error)
         }
+      } else {
+        console.warn('Cannot record spin: gameId is null. Did you forget to start a game?')
       }
     },
     [gameId]

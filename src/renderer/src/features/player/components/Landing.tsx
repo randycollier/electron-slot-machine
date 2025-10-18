@@ -2,36 +2,37 @@ import { useState, useEffect, useCallback } from 'react'
 import { usePlayers } from '../hooks'
 import Leaderboard from './Leaderboard'
 import PlayerLogin from './PlayerLogin'
-import type { LeaderboardEntry, Player } from '@/types'
 
+import type { LeaderboardEntry, Player } from '@/types'
+import { useIntl } from 'react-intl'
 interface LandingProps {
   onPlayerSelected: (player: Player) => void
 }
 
 const Landing = ({ onPlayerSelected }: LandingProps): JSX.Element => {
+  const { formatMessage } = useIntl()
   const { getLeaderboard, player, getOrCreatePlayer } = usePlayers()
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([])
   const [playerName, setPlayerName] = useState<string>('')
 
-  useEffect(() => {
-    const fetchLeaderboard = async (): Promise<void> => {
-      const leaderboard = await getLeaderboard()
-      setLeaderboard(leaderboard)
-    }
-    fetchLeaderboard()
+  const title = formatMessage({ id: 'landing.title', defaultMessage: 'Slot Machine' })
+  const fetchLeaderboard = useCallback(async (): Promise<void> => {
+    const leaderboard = await getLeaderboard()
+    setLeaderboard(leaderboard)
   }, [getLeaderboard])
+
+  useEffect(() => {
+    fetchLeaderboard()
+  }, [fetchLeaderboard])
 
   const handleNameChange = useCallback((evt: React.ChangeEvent<HTMLInputElement>): void => {
     const value = evt.target.value.trim()
-    console.log('value', value)
     setPlayerName(value)
   }, [])
 
   const submitPlayerName = useCallback(async (): Promise<void> => {
-
     const currentPlayer = await getOrCreatePlayer(playerName)
-    console.log('currentPlayer', currentPlayer)
-   
+
     if (currentPlayer) {
       onPlayerSelected(currentPlayer)
     } else {
@@ -41,7 +42,7 @@ const Landing = ({ onPlayerSelected }: LandingProps): JSX.Element => {
 
   return (
     <div>
-      <h1>Slot Machine</h1>
+      <h1>{title}</h1>
       <PlayerLogin
         player={player}
         playerName={playerName}

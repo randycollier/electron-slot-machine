@@ -30,13 +30,6 @@ const usePlayers = (): UsePlayersReturn => {
       return []
     }
   }, [])
-  // const addTokensToPlayer = useCallback(async (playerId: number, tokens: number): Promise<void> => {
-  //   try {
-  //     await window.api.addTokensToPlayer(playerId, tokens)
-  //   } catch (error) {
-  //     console.error('Error adding tokens to player:', error)
-  //   }
-  // }, [])
 
   return {
     player,

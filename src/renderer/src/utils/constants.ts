@@ -1,5 +1,4 @@
 export const DEFAULT_REEL_COUNT = 3
-
 export const DEFAULT_REEL_SYMBOLS: string[] = ['🍎', '🍌', '🍇', '🍓', '🍒', '🍊', '🍋']
 export const DEFAULT_INITIAL_REEL_SYMBOL = '💎'
 export const SPIN_INTERVAL = 100
@@ -8,3 +7,14 @@ export const COST_PER_SPIN = 10
 export const DEFAULT_STARTING_BALANCE = 100
 export const MIN_BET = 10
 export const MAX_BET = 100
+export const WIN_AMOUNT_MAP = {
+  '🍎🍎🍎': 100,
+  '🍌🍌🍌': 50,
+  '🍇🍇🍇': 25,
+  '🍓🍓🍓': 10,
+  '🍒🍒🍒': 5,
+  '🍊🍊🍊': 2,
+  '🍋🍋🍋': 1,
+  '🍒🍒🍋': 20,
+  '🍌🍊🍋': 25
+}

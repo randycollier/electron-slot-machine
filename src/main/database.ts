@@ -3,7 +3,6 @@ import Database from 'better-sqlite3'
 import { join } from 'path'
 import type { Player } from '@preload'
 
-
 // Database instance
 let db: Database.Database | null = null
 
@@ -124,6 +123,7 @@ export function setupIpcHandlers(): void {
   ipcMain.handle(
     'record-spin',
     (_, gameId: number, symbols: string, betAmount: number, winAmount: number) => {
+      console.log('DB >>>>>>Recording spin:', { gameId, symbols, betAmount, winAmount })
       const result = getDatabase()
         .prepare(
           `

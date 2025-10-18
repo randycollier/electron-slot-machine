@@ -46,6 +46,7 @@ declare global {
         winAmount: number
       ) => Promise<{ spinId: number }>
       getLeaderboard: () => Promise<LeaderboardEntry[]>
+      onAppClosing: (callback: () => void) => () => void
     }
   }
 }

@@ -1,68 +1,45 @@
 import type { Player } from '@/types'
 import { DEFAULT_STARTING_BALANCE } from '@/utils/constants'
+import { useIntl } from 'react-intl'
 
 interface GameIntroductionProps {
   player: Player
-  isNewPlayer: boolean
   onStartGame: () => void
 }
 
-const GameIntroduction = ({
-  player,
-  onStartGame,
-  isNewPlayer = true
-}: GameIntroductionProps): JSX.Element => {
+const GameIntroduction = ({ player, onStartGame }: GameIntroductionProps): JSX.Element => {
+  const { formatMessage } = useIntl()
+  const welcomeMessage = formatMessage(
+    {
+      id: 'introduction.welcome',
+      defaultMessage: 'Welcome, {name}!'
+    },
+    { name: player.name }
+  )
+  const startingBalance = formatMessage(
+    {
+      id: 'introduction.startingBalance',
+      defaultMessage: '{balance} Credits'
+    },
+    { balance: DEFAULT_STARTING_BALANCE }
+  )
+  const goodLuckMessage = formatMessage({
+    id: 'introduction.goodLuck',
+    defaultMessage: 'Good luck spinning the reels!'
+  })
+  const startGameButtonText = formatMessage({
+    id: 'introduction.startGameButton',
+    defaultMessage: 'Start Playing'
+  })
   return (
     <div style={{ textAlign: 'center', padding: '2rem' }}>
-      {isNewPlayer ? (
-        <div>
-          <h1>Welcome, {player.name}! 🎰</h1>
-          <p style={{ fontSize: '1.2rem', margin: '2rem 0' }}>
-            You&apos;re a new player! Get started with:
-          </p>
-          <div style={{ fontSize: '3rem', fontWeight: 'bold', margin: '2rem 0', color: '#4CAF50' }}>
-            {DEFAULT_STARTING_BALANCE} Credits
-          </div>
-          <p style={{ margin: '1rem 0' }}>Good luck spinning the reels!</p>
+      <div>
+        <h1>{welcomeMessage} 🎰</h1>
+        <div style={{ fontSize: '3rem', fontWeight: 'bold', margin: '2rem 0', color: '#4CAF50' }}>
+          {startingBalance}
         </div>
-      ) : (
-        <div>
-          <h1>Welcome Back, {player.name}! 🎰</h1>
-          <div style={{ margin: '2rem 0' }}>
-            <h2>Your Stats</h2>
-            <div
-              style={{
-                display: 'flex',
-                gap: '2rem',
-                justifyContent: 'center',
-                margin: '1.5rem 0'
-              }}
-            >
-              <div>
-                <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#2196F3' }}>
-                  {player.highest_balance}
-                </div>
-                <div style={{ color: '#666' }}>Games Played</div>
-              </div>
-              <div>
-                <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#FF9800' }}>
-                  {player.highest_balance}
-                </div>
-                <div style={{ color: '#666' }}>Highest Balance</div>
-              </div>
-              <div>
-                <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#9C27B0' }}>
-                  {player.total_spins}
-                </div>
-                <div style={{ color: '#666' }}>Total Spins</div>
-              </div>
-            </div>
-            <p style={{ fontSize: '1.2rem', margin: '1rem 0' }}>
-              Starting with: <strong>{DEFAULT_STARTING_BALANCE} Credits</strong>
-            </p>
-          </div>
-        </div>
-      )}
+        <p style={{ margin: '1rem 0' }}>{goodLuckMessage}</p>
+      </div>
 
       <button
         onClick={onStartGame}
@@ -78,7 +55,7 @@ const GameIntroduction = ({
           fontWeight: 'bold'
         }}
       >
-        Start Playing
+        {startGameButtonText}
       </button>
     </div>
   )

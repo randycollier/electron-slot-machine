@@ -22,6 +22,21 @@ function createWindow(): void {
     mainWindow.show()
   })
 
+  // Handle window close - give renderer time to cleanup
+  mainWindow.on('close', (e) => {
+    if (!mainWindow.isDestroyed()) {
+      e.preventDefault()
+      // Send cleanup signal to renderer
+      mainWindow.webContents.send('app-closing')
+      // Wait a bit for cleanup, then close
+      setTimeout(() => {
+        if (!mainWindow.isDestroyed()) {
+          mainWindow.destroy()
+        }
+      }, 500)
+    }
+  })
+
   mainWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url)
     return { action: 'deny' }
