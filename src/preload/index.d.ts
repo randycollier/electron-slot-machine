@@ -32,27 +32,22 @@ interface LeaderboardEntry {
   total_spins: number
 }
 
-interface Window {
-  api: {
-    getOrCreatePlayer: (playerName: string) => Promise<Player>
-    getNumberOfGamesPlayed: (playerId: number) => Promise<{ count: number }>
-    startGame: (playerId: number, startingBalance: number) => Promise<{ gameId: number }>
-    endGame: (gameId: number, endingBalance: number) => Promise<void>
-    recordSpin: (
-      gameId: number,
-      symbols: string,
-      betAmount: number,
-      winAmount: number
-    ) => Promise<{ spinId: number }>
-    getLeaderboard: () => Promise<LeaderboardEntry[]>
-  }
-}
-
-
-
 declare global {
   interface Window {
     electron: ElectronAPI
-    api: Window.api
+    api: {
+      getOrCreatePlayer: (playerName: string) => Promise<Player>
+      startGame: (playerId: number, startingBalance: number) => Promise<{ gameId: number }>
+      endGame: (gameId: number, endingBalance: number) => Promise<void>
+      recordSpin: (
+        gameId: number,
+        symbols: string,
+        betAmount: number,
+        winAmount: number
+      ) => Promise<{ spinId: number }>
+      getLeaderboard: () => Promise<LeaderboardEntry[]>
+    }
   }
 }
+
+export type { Player, Game, Spin, LeaderboardEntry }

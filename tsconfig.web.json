@@ -12,19 +12,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": [
-        "src/*"
-      ],
-      "@components/*": [
-        "src/renderer/src/components/*"
-      ],
-      "@hooks/*": [
-        "src/renderer/src/hooks/*"
-      ],
-      "@utils/*": [
-        "src/renderer/src/utils/*"
-      ],
-      "@assets/*": [
-        "src/renderer/src/assets/*"
+        "src/renderer/src/*"
       ],
       "@renderer/*": [
         "src/renderer/src/*"

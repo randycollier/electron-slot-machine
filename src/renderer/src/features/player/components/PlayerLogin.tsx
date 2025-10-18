@@ -1,5 +1,5 @@
-import {memo} from 'react'
-import type { Player } from '@preload'
+import { memo } from 'react'
+import type { Player } from '@/types'
 
 interface PlayerLoginProps {
   playerName: string
@@ -9,29 +9,25 @@ interface PlayerLoginProps {
 }
 
 const PlayerLogin = ({
-  player,
   playerName,
   handleNameChange,
   submitPlayerName
 }: PlayerLoginProps): JSX.Element => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault()
+    submitPlayerName()
+  }
   return (
     <section>
       <h2>Enter your name</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="playerName">Player Name</label>
         <input id="playerName" type="text" value={playerName} onChange={handleNameChange} />
-        <button disabled={!playerName} type="button" onClick={submitPlayerName}>
+        <button disabled={!playerName} type="submit">
           Start
         </button>
       </form>
-
-      {player && (
-        <div>
-          <h2>Welcome, {player.name || 'Player'}</h2>
-        </div>
-      )}
     </section>
   )
 }
-
 export default memo(PlayerLogin)

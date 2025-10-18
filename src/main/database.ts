@@ -100,7 +100,6 @@ export function setupIpcHandlers(): void {
     let player = getDatabase()
       .prepare('SELECT * FROM players WHERE name = ?')
       .get(playerName) as Player
-    console.log('>>>player from database', player)
     // If player doesn't exist, create a new one
     if (!player) {
       const result = getDatabase().prepare('INSERT INTO players (name) VALUES (?)').run(playerName)
@@ -112,13 +111,6 @@ export function setupIpcHandlers(): void {
     return player
   })
 
-  // Get the number of games played by a player
-  ipcMain.handle('get-number-of-games-played', (_, playerId: number) => {
-    return getDatabase()
-      .prepare('SELECT COUNT(*) as count FROM games WHERE player_id = ?')
-      .get(playerId) as { count: number }
-  })
-  
   // Start new game
   ipcMain.handle('start-game', (_, playerId: number, startingBalance: number) => {
     const result = getDatabase()

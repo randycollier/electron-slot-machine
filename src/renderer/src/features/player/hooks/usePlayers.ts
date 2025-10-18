@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
-import type { Player, LeaderboardEntry } from '@preload'
+import type { Player, LeaderboardEntry } from '@/types'
 
-type UsePlayersReturn = {
+interface UsePlayersReturn {
   player: Player | null
   getOrCreatePlayer: (playerName: string) => Promise<Player | null>
   getLeaderboard: () => Promise<LeaderboardEntry[]>
@@ -12,9 +12,7 @@ const usePlayers = (): UsePlayersReturn => {
 
   const getOrCreatePlayer = useCallback(async (playerName: string): Promise<Player | null> => {
     try {
-
       const player = await window.api.getOrCreatePlayer(playerName)
-      console.log(playerName,'>>>player from usePlayers', player)
       setPlayer(player)
       return player
     } catch (error) {
@@ -32,12 +30,19 @@ const usePlayers = (): UsePlayersReturn => {
       return []
     }
   }, [])
+  // const addTokensToPlayer = useCallback(async (playerId: number, tokens: number): Promise<void> => {
+  //   try {
+  //     await window.api.addTokensToPlayer(playerId, tokens)
+  //   } catch (error) {
+  //     console.error('Error adding tokens to player:', error)
+  //   }
+  // }, [])
 
   return {
     player,
     getLeaderboard,
     getOrCreatePlayer
-  } as const
+  }
 }
 
 export default usePlayers

@@ -1,10 +1,10 @@
-import type { LeaderboardEntry } from '@preload'
+import type { LeaderboardEntry } from '@/types'
 
-interface LeaderBoardProps {
+interface LeaderboardProps {
   leaderboard: LeaderboardEntry[]
 }
 
-const LeaderBoard = ({ leaderboard }: LeaderBoardProps): JSX.Element | null => {
+const Leaderboard = ({ leaderboard }: LeaderboardProps): JSX.Element | null => {
   if (!leaderboard || leaderboard.length === 0) {
     return null
   }
@@ -14,7 +14,7 @@ const LeaderBoard = ({ leaderboard }: LeaderBoardProps): JSX.Element | null => {
       <ul>
         {leaderboard.map((player) => (
           <li key={player.name}>
-            {player.name} {player.highest_balance} {player.total_spins}
+            {player.name} - Balance: {player.highest_balance} - Spins: {player.total_spins}
           </li>
         ))}
       </ul>
@@ -22,4 +22,4 @@ const LeaderBoard = ({ leaderboard }: LeaderBoardProps): JSX.Element | null => {
   )
 }
 
-export default LeaderBoard
+export default Leaderboard
