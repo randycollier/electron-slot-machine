@@ -123,7 +123,6 @@ export function setupIpcHandlers(): void {
   ipcMain.handle(
     'record-spin',
     (_, gameId: number, symbols: string, betAmount: number, winAmount: number) => {
-      console.log('DB >>>>>>Recording spin:', { gameId, symbols, betAmount, winAmount })
       const result = getDatabase()
         .prepare(
           `
